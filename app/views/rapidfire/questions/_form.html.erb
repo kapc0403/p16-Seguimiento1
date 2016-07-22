@@ -1,0 +1,40 @@
+<h3>Pregunta</h3>
+
+<%= form_for form, as: :question, url: url, method: method do |f| %>
+  <%- unless form.errors.empty? %>
+    <ul>
+      <%- form.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= f.label "Tipo" %>
+  <%= f.select :type, ::Rapidfire::QuestionForm::QUESTION_TYPES, {}, id: "question_type" %>
+
+  <%= f.label "Pregunta" %>
+  <%= f.text_field :question_text %>
+
+  <%= f.label "Respuesta(s)" %>
+  <%= f.text_area :answer_options, rows: 5 %>
+
+  <h4>Other options</h4>
+  <hr/>
+
+  <%= f.label "Obligatoria" %>
+  <%= f.check_box :answer_presence %><br>
+
+  <%= f.label "Digitos minimos" %>
+  <%= f.text_field :answer_minimum_length %><br>
+
+  <%= f.label "Digitos maximos" %>
+  <%= f.text_field :answer_maximum_length %><br>
+
+  <%= f.label "Respuesta igual a:" %>
+  <%= f.text_field :answer_greater_than_or_equal_to %><br>
+
+  <%= f.label "Respuesta parecida a:" %>
+  <%= f.text_field :answer_less_than_or_equal_to %><br>
+
+  <%= f.submit "Guardar" %>
+<% end %>

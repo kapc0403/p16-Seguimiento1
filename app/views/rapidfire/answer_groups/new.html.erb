@@ -1,0 +1,11 @@
+<h2>Por favor responda las siguientes preguntas:</h2>
+<hr/>
+
+<%= form_for([@question_group, @answer_group_builder]) do |f| %>
+  <%- @answer_group_builder.answers.each do |answer| %>
+    <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
+      <%= render_answer_form_helper(answer, answer_form) %><br>
+    <% end %>
+  <% end %>
+  <%= f.submit "Enviar" %>
+<% end %>
